@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Quiz Feira Cultural – responda perguntas no seu ritmo. Ideal para feiras e eventos escolares.">
+<meta name="theme-color" content="#1E3FAE">
+<title>Quiz Feira Cultural</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Mono:wght@500&family=Figtree:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF;
+  --surface:#FFFFFF;
+  --ink:#16213A;
+  --muted:#566182;
+  --line:#D3DAE8;
+  --accent:#1E3FAE;
+  --accent-ink:#FFFFFF;
+  --good:#18794E;
+  --good-bg:#E3F4EB;
+  --bad:#B8321F;
+  --bad-bg:#FBE9E5;
+  --font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --font-body:'Figtree','Segoe UI',system-ui,sans-serif;
+  --font-mono:'DM Mono',ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background-color:var(--bg);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg font-family='Arial,Helvetica,sans-serif' font-weight='700' fill='%23E3E8F3'%3E%3Ctext x='22' y='62' font-size='44' transform='rotate(-14 22 62)'%3E?%3C/text%3E%3Ctext x='150' y='46' font-size='30' transform='rotate(18 150 46)'%3E?%3C/text%3E%3Ctext x='198' y='140' font-size='54' transform='rotate(-8 198 140)'%3E?%3C/text%3E%3Ctext x='92' y='152' font-size='34' transform='rotate(24 92 152)'%3E?%3C/text%3E%3Ctext x='28' y='232' font-size='50' transform='rotate(10 28 232)'%3E?%3C/text%3E%3Ctext x='150' y='236' font-size='28' transform='rotate(-20 150 236)'%3E?%3C/text%3E%3Ctext x='96' y='60' font-size='24' transform='rotate(-6 96 60)'%3E?%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-size:260px 260px;
+  color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5;
+  padding:28px 16px 56px;
+  min-height:100dvh;
+}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+.wrap>*{min-width:0}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:2.1rem;font-weight:800;letter-spacing:-0.01em}
+h2{font-size:1.35rem;font-weight:800}
+p{margin:0}
+.brand{display:flex;flex-direction:column;gap:6px}
+.brand-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bubs{display:flex;gap:5px}
+.bubs span{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;font:500 11px var(--font-mono)}
+.bubs span:last-child{background:var(--ink);color:var(--bg)}
+.sub{color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:0 1px 2px rgba(22,33,58,.04)}
+label,.lbl{font-weight:600;font-size:.9rem}
+.hint{color:var(--muted);font-size:.9rem}
+input,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:64px}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:.8}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.codein{font-family:var(--font-mono);font-size:1.9rem;letter-spacing:.35em;text-transform:uppercase;width:11ch;padding:8px 12px 8px calc(12px + .35em);text-align:center}
+.field{display:flex;flex-direction:column;gap:6px}
+.btn{font:600 1rem var(--font-body);background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--accent);border-radius:8px;padding:11px 18px;cursor:pointer;min-height:44px}
+.btn:hover:not(:disabled){filter:brightness(1.08)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover:not(:disabled){border-color:var(--ink);filter:none}
+.btn.small{padding:6px 12px;min-height:34px;font-size:.9rem}
+.btn.big{font-size:1.25rem;padding:18px 32px;min-height:60px;border-radius:10px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.err{color:var(--bad);font-weight:500}
+.ok-msg{color:var(--good);font-weight:600}
+.notice{border:1.5px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--surface);color:var(--muted);font-size:.95rem}
+.notice strong{color:var(--ink)}
+.warn{border:1.5px solid var(--bad);color:var(--bad);border-radius:8px;padding:10px 14px;background:var(--bad-bg);font-weight:500}
+.qcard{border:1px solid var(--line);border-radius:8px;padding:14px;margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.qcard legend{font:800 .8rem var(--font-mono);letter-spacing:.06em;text-transform:uppercase;padding:0 6px;color:var(--muted)}
+.orow{display:flex;align-items:center;gap:10px}
+.orow input[type=radio]{width:20px;height:20px;accent-color:var(--accent);flex:none;padding:0}
+.bub{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;font:500 .85rem var(--font-mono);flex:none}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.code{display:flex;gap:8px}
+.code span{width:52px;height:64px;border:2px solid var(--ink);border-radius:6px;font:500 2.2rem var(--font-mono);display:grid;place-items:center;background:var(--surface)}
+.chip{display:inline-flex;gap:8px;align-items:center;font:500 .85rem var(--font-mono);color:var(--muted)}
+.timer{display:flex;align-items:center;gap:12px}
+.bar{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:var(--accent);transition:width .2s linear}
+.timer.low .bar i{background:var(--bad)}
+.timer.low .tnum{color:var(--bad)}
+.tnum{font:500 1.1rem var(--font-mono);min-width:3.2ch;text-align:right;font-variant-numeric:tabular-nums}
+.question{font:800 1.45rem var(--font-display);line-height:1.25;text-wrap:balance}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer;min-height:52px}
+.opt .txt{flex:1;min-width:0;overflow-wrap:anywhere}
+.opt .tag{font:500 .78rem var(--font-mono);flex:none}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt:disabled{cursor:default}
+.opt.ok{border-color:var(--good);background:var(--good-bg)}
+.opt.ok .bub{background:var(--good);border-color:var(--good);color:var(--surface)}
+.opt.ok .tag{color:var(--good)}
+.opt.no{border-color:var(--bad);background:var(--bad-bg)}
+.opt.no .bub{background:var(--bad);border-color:var(--bad);color:var(--surface)}
+.opt.no .tag{color:var(--bad)}
+.opt.dim{opacity:.6}
+.result{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.result .msg{font-weight:600}
+.result .msg.good{color:var(--good)}
+.result .msg.bad{color:var(--bad)}
+.score{font:800 3.4rem var(--font-display);line-height:1;font-variant-numeric:tabular-nums}
+.sumrow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.rooms{display:flex;flex-direction:column;gap:10px}
+.rrow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.rinfo{display:flex;flex-direction:column;gap:2px;min-width:0}
+.rt{font-weight:600;overflow-wrap:anywhere}
+input[type=file]{padding:8px;cursor:pointer}
+input[type=file]::file-selector-button{font:600 .9rem var(--font-body);background:transparent;color:var(--ink);border:1.5px solid var(--line);border-radius:8px;padding:6px 12px;margin-right:12px;cursor:pointer}
+.fair{text-align:center;align-items:center;padding:40px 24px}
+.fair h2{font-size:2.1rem}
+.fair .code{justify-content:center}
+.badge{display:inline-block;font:600 .75rem var(--font-mono);letter-spacing:.04em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);padding:4px 10px;border-radius:999px;margin-bottom:8px}
+.progress-dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:4px 0}
+.progress-dots span{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.progress-dots span.done{background:var(--accent)}
+.progress-dots span.current{background:var(--ink);transform:scale(1.15)}
+.pct{font:600 1.1rem var(--font-mono);color:var(--muted)}
+@media (max-width:480px){
+  h1{font-size:1.7rem}
+  .code span{width:44px;height:56px;font-size:1.9rem}
+  .fair{padding:28px 16px}
+  .fair h2{font-size:1.7rem}
+  .btn.big{font-size:1.15rem;padding:16px 24px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .opt,.btn{transition:border-color .15s,background-color .15s,filter .15s}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+(function(){
+var KEY='quiz-feira-cultural:v1',LETTERS='ABCDEFGHJKLMNPQRSTUVWXYZ',TIME=60000,OPT=['A','B','C','D'];
+var $app=document.getElementById('app');
+var store={rooms:{}};
+var S={view:'home',err:'',msg:'',draft:null,editCode:'',confirm:'',cur:null,kiosk:'',exitAsk:false,exitErr:'',joinCode:'',pending:null,storeWarn:'',bkmsg:'',bkerr:false};
+var timerH=null;
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function fmt(ms){var s=Math.ceil(ms/1000);var m=Math.floor(s/60);var r=s%60;return m+':'+(r<10?'0':'')+r;}
+function today(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function ident(n){var a=[];for(var i=0;i<n;i++)a.push(i);return a;}
+function shuffle(n){var a=ident(n);for(var i=n-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function shuffleAll(qs){return qs.map(function(){return shuffle(4);});}
+function newDraft(){
+  return {title:'Revisão geral (exemplo)',questions:[
+    {q:'Qual é o maior planeta do Sistema Solar?',opts:['Mercúrio','Marte','Júpiter','Saturno'],correct:2},
+    {q:'Quanto é 7 × 8?',opts:['54','56','58','64'],correct:1},
+    {q:'Quem escreveu o romance Dom Casmurro?',opts:['José de Alencar','Machado de Assis','Clarice Lispector','Monteiro Lobato'],correct:1}
+  ]};
+}
+var FAIR_CODE='_feira';
+var FAIR={title:'Pegada Ecológica',questions:[
+  {q:'O que é pegada ecológica?',opts:['Um novo tipo de combustível renovável','Um indicador ambiental dos recursos naturais utilizados','Caminhadas em florestas, com fins de protesto','Quantidade de animais em uma região específica'],correct:1},
+  {q:'Quais ações podem ajudar a diminuir a pegada ecológica?',opts:['Deixar as torneiras ligadas','Deixar as luzes acesas','Reciclar objetos','Comprar coisas novas todos os dias'],correct:2},
+  {q:'O que significa viver de maneira mais sustentável em relação à pegada ecológica?',opts:['Gastar recursos naturais sem se importar','Não usar mais recursos naturais','Usar recursos naturais quando necessário','Usar cada vez mais produtos descartáveis'],correct:2},
+  {q:'Quais coisas NÃO ajudam a diminuir a pegada ecológica?',opts:['Usar transporte público','Fazer caminhadas','Usar bicicletas ou carros elétricos','Deixar as torneiras ligadas'],correct:3},
+  {q:'Qual das opções apresenta um recurso natural utilizado na produção de muitos produtos do cotidiano?',opts:['Água, madeira e minerais','Apenas objetos descartados pelas pessoas','Apenas objetos eletrônicos','Materiais artificiais'],correct:0},
+  {q:'O que pode acontecer quando a pegada ecológica de uma população é muito grande?',opts:['Os recursos naturais aumentam','O meio ambiente sofre maior pressão e degradação','A poluição diminui automaticamente','Os recursos naturais deixam de ser utilizados'],correct:1},
+  {q:'Qual hábito ajuda a economizar água e diminuir a pegada ecológica?',opts:['Tomar banhos muito demorados','Lavar calçadas com mangueira','Fechar a torneira ao escovar os dentes','Deixar a torneira aberta'],correct:2},
+  {q:'Como o consumo exagerado de produtos afeta a pegada ecológica?',opts:['Diminui a produção de lixo','Reduz o uso de matérias-primas','Aumenta o consumo de recursos naturais e a produção de resíduos','Elimina a poluição'],correct:2},
+  {q:'Qual atitude ajuda a reduzir a quantidade de lixo no planeta?',opts:['Reutilizar materiais e reciclar produtos','Jogar lixo em terrenos vazios','Comprar produtos descartáveis','Queimar resíduos'],correct:0},
+  {q:'Qual é o principal objetivo de calcular a pegada ecológica?',opts:['Descobrir a quantidade de animais existentes','Medir o impacto das atividades humanas sobre os recursos naturais','Calcular o tamanho das florestas','Descobrir a quantidade de rios de uma região'],correct:1}
+]};
+(function freeze(o){Object.freeze(o);Object.keys(o).forEach(function(k){if(o[k]&&typeof o[k]==='object'&&!Object.isFrozen(o[k]))freeze(o[k]);});})(FAIR);
+function roomOf(code){return code===FAIR_CODE?FAIR:store.rooms[code];}
+function blankQ(){return {q:'',opts:['','','',''],correct:0};}
+
+/* ---------- validação ---------- */
+var CODE_RE=/^[A-Z]{4,5}$/;
+function isObj(o){return o!==null&&typeof o==='object'&&!Array.isArray(o);}
+function cleanRoom(r){
+  if(!isObj(r)||typeof r.id!=='string'||!CODE_RE.test(r.id)||!isObj(r.data))return null;
+  var d=r.data;
+  if(typeof d.title!=='string'||!Array.isArray(d.questions)||d.questions.length<1||d.questions.length>30)return null;
+  var qs=[];
+  for(var i=0;i<d.questions.length;i++){
+    var q=d.questions[i];
+    if(!isObj(q)||typeof q.q!=='string'||!Array.isArray(q.opts)||q.opts.length!==4)return null;
+    for(var j=0;j<4;j++){if(typeof q.opts[j]!=='string')return null;}
+    if(!(q.correct===0||q.correct===1||q.correct===2||q.correct===3))return null;
+    qs.push({q:q.q.slice(0,240),opts:q.opts.map(function(x){return x.slice(0,120);}),correct:q.correct});
+  }
+  var out={title:d.title.slice(0,60),questions:qs,createdAt:typeof d.createdAt==='number'?d.createdAt:Date.now()};
+  if(d.closed===true)out.closed=true;
+  if(typeof d.editedAt==='number')out.editedAt=d.editedAt;
+  return {id:r.id,data:out};
+}
+function parseBackup(text){
+  var p;
+  try{p=JSON.parse(text);}catch(e){return {error:'O arquivo não é um JSON válido.'};}
+  if(!isObj(p)||p.app!=='quiz-feira-cultural'||p.version!==1||!Array.isArray(p.rooms))return {error:'Este arquivo não é um backup do Quiz Feira Cultural.'};
+  var rooms=[],skipped=0,seen={};
+  p.rooms.forEach(function(r){var c=cleanRoom(r);if(c&&!seen[c.id]){seen[c.id]=1;rooms.push(c);}else skipped++;});
+  if(!rooms.length)return {error:'O arquivo não tem nenhuma sala válida.'};
+  return {rooms:rooms,skipped:skipped,scores:Array.isArray(p.scores)?p.scores.length:0};
+}
+
+/* ---------- armazenamento local ---------- */
+function load(){
+  try{
+    var t=localStorage.getItem(KEY);
+    if(t){
+      var o=JSON.parse(t),rs={};
+      if(isObj(o)&&isObj(o.rooms)){
+        Object.keys(o.rooms).forEach(function(k){var c=cleanRoom({id:k,data:o.rooms[k]});if(c)rs[c.id]=c.data;});
+      }
+      store={rooms:rs};
+    }
+  }catch(e){}
+}
+function dropOldCopies(){
+  var flag=KEY+':fair1',done=false;
+  try{done=localStorage.getItem(flag)==='1';}catch(e){}
+  if(done)return;
+  var all=JSON.stringify(FAIR.questions),first5=JSON.stringify(FAIR.questions.slice(0,5));
+  Object.keys(store.rooms).forEach(function(c){
+    var r=store.rooms[c];
+    if(r.title===FAIR.title){var q=JSON.stringify(r.questions);if(q===all||q===first5)delete store.rooms[c];}
+  });
+  persist();
+  try{localStorage.setItem(flag,'1');}catch(e){}
+}
+function persist(){
+  try{localStorage.setItem(KEY,JSON.stringify(store));S.storeWarn='';}
+  catch(e){S.storeWarn='Este navegador não deixou salvar as salas neste computador. Exporte um backup para não perder o trabalho.';}
+}
+function roomList(){
+  return Object.keys(store.rooms).map(function(c){var r=store.rooms[c];return {code:c,title:r.title,questions:r.questions,closed:!!r.closed,createdAt:r.createdAt||0,editedAt:r.editedAt};})
+    .sort(function(a,b){return b.createdAt-a.createdAt;});
+}
+function randCode(){var c='';for(var i=0;i<5;i++)c+=LETTERS.charAt(Math.floor(Math.random()*LETTERS.length));return c;}
+function newCode(){for(var t=0;t<50;t++){var c=randCode();if(!store.rooms[c])return c;}return null;}
+
+/* ---------- telas ---------- */
+function brandHTML(){
+  return '<header class="brand"><div class="brand-row"><h1>Quiz Feira Cultural</h1><div class="bubs" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span></div></div>'+
+    '<p class="sub">Monte suas perguntas e deixe o quiz rodando. Cada pessoa responde no próprio ritmo.</p></header>';
+}
+function codeBoxes(code){
+  return '<div class="code" aria-label="Código da sala: '+esc(code.split('').join(' '))+'">'+code.split('').map(function(c){return '<span aria-hidden="true">'+esc(c)+'</span>';}).join('')+'</div>';
+}
+function homeHTML(){
+  var list=roomList();
+  var rows=list.length?list.map(function(r){
+    var c=esc(r.code),conf=S.confirm;
+    var b='<button class="btn small" data-act="play" data-code="'+c+'"'+(r.closed?' disabled':'')+'>Jogar</button>'+
+      '<button class="btn ghost small" data-act="edit" data-code="'+c+'">Editar</button>';
+    if(conf==='end:'+r.code)b+='<button class="btn small" data-act="endyes" data-code="'+c+'">Confirmar encerramento</button><button class="btn ghost small" data-act="noconf">Cancelar</button>';
+    else if(r.closed)b+='<button class="btn ghost small" data-act="reopen" data-code="'+c+'">Reabrir</button>';
+    else b+='<button class="btn ghost small" data-act="endask" data-code="'+c+'">Encerrar</button>';
+    if(conf==='del:'+r.code)b+='<button class="btn small" data-act="delyes" data-code="'+c+'">Confirmar exclusão</button><button class="btn ghost small" data-act="noconf">Cancelar</button>';
+    else b+='<button class="btn ghost small" data-act="delask" data-code="'+c+'">Excluir</button>';
+    return '<div class="rrow"><div class="rinfo"><span class="rt">'+esc(r.title)+'</span><span class="chip">'+c+' · '+(r.closed?'encerrada':'aberta')+' · '+r.questions.length+' perguntas</span></div><div class="actions">'+b+'</div></div>';
+  }).join(''):'<p class="hint">Você ainda não criou nenhuma sala. O modo feira acima já está pronto para usar.</p>';
+  var pend=S.pending;
+  return (S.storeWarn?'<p class="warn" role="alert">'+esc(S.storeWarn)+'</p>':'')+
+  '<section class="panel" aria-labelledby="h-fair"><h2 id="h-fair">Modo feira</h2>'+
+    '<p class="hint">Quiz fixo de <strong>'+esc(FAIR.title)+'</strong> com '+FAIR.questions.length+' perguntas. Ideal para visitantes: a tela volta sozinha ao início após cada jogador. Não pode ser editado nem excluído.</p>'+
+    '<div class="actions"><button class="btn" data-act="fair">Iniciar modo feira</button></div></section>'+
+  '<section class="panel" aria-labelledby="h-rooms"><h2 id="h-rooms">Salas neste computador</h2><div class="rooms">'+rows+'</div>'+
+    '</section>'+
+  '<section class="panel" aria-labelledby="h-join"><h2 id="h-join">Jogar com um código</h2>'+
+    '<div class="field"><label for="joinCode">Código da sala</label><input id="joinCode" class="codein" data-f="code" maxlength="5" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABCDE" value="'+esc(S.joinCode)+'"></div>'+
+    '<div class="actions"><button class="btn" data-act="join">Entrar</button></div>'+
+    (S.err?'<p class="err" role="alert">'+esc(S.err)+'</p>':'')+
+  '</section>'+
+  '<section class="panel" aria-labelledby="h-new"><h2 id="h-new">Criar uma sala</h2>'+
+    '<p class="hint">Escreva as perguntas, cada uma com quatro alternativas e uma resposta certa. A sala ganha um código de 5 letras.</p>'+
+    '<div class="actions"><button class="btn ghost" data-act="newroom">Montar perguntas</button></div>'+
+    (S.msg?'<p class="ok-msg" role="status">'+esc(S.msg)+'</p>':'')+
+  '</section>'+
+  '<section class="panel" aria-labelledby="h-bk"><h2 id="h-bk">Backup e transferência</h2>'+
+    '<p class="hint">Para levar as salas para outro computador, exporte aqui e importe lá. O quiz do modo feira já vem no arquivo e não entra no backup.</p>'+
+    '<div class="actions"><button class="btn ghost" data-act="export">Exportar tudo</button></div>'+
+    '<div class="field"><label for="impfile">Importar de um arquivo de backup</label><input type="file" id="impfile" data-f="file" accept=".json,application/json"></div>'+
+    (pend?'<div class="notice"><strong>Pronto para importar:</strong> '+pend.rooms.length+' salas'+(pend.skipped?' ('+pend.skipped+' itens inválidos serão ignorados)':'')+(pend.scores?'. Os '+pend.scores+' registros de jogo do backup não são usados nesta versão':'')+'. Salas com o mesmo código serão substituídas.</div>'+
+      '<div class="actions"><button class="btn" data-act="impgo">Importar agora</button><button class="btn ghost" data-act="impno">Cancelar</button></div>':'')+
+    (S.bkmsg?'<p class="'+(S.bkerr?'err':'ok-msg')+'" role="status">'+esc(S.bkmsg)+'</p>':'')+
+  '</section>';
+}
+function builderHTML(){
+  var d=S.draft;
+  var qs=d.questions.map(function(qq,i){
+    var opts=OPT.map(function(L,j){
+      return '<div class="orow"><input type="radio" name="c'+i+'" value="'+j+'" data-f="c" data-i="'+i+'" aria-label="Marcar a alternativa '+L+' como correta"'+(qq.correct===j?' checked':'')+'>'+
+        '<span class="bub" aria-hidden="true">'+L+'</span>'+
+        '<input type="text" data-f="o" data-i="'+i+'" data-j="'+j+'" maxlength="120" aria-label="Alternativa '+L+' da pergunta '+(i+1)+'" placeholder="Alternativa '+L+'" value="'+esc(qq.opts[j])+'"></div>';
+    }).join('');
+    return '<fieldset class="qcard"><legend>Pergunta '+(i+1)+'</legend>'+
+      '<textarea data-f="q" data-i="'+i+'" maxlength="240" aria-label="Texto da pergunta '+(i+1)+'" placeholder="Escreva a pergunta">'+esc(qq.q)+'</textarea>'+
+      '<p class="hint">Marque a bolinha da alternativa correta.</p>'+opts+
+      (d.questions.length>1?'<div class="actions"><button class="btn ghost small" data-act="delq" data-i="'+i+'">Remover pergunta '+(i+1)+'</button></div>':'')+
+    '</fieldset>';
+  }).join('');
+  return '<section class="panel" aria-labelledby="h-b"><div class="qhead"><h2 id="h-b">'+(S.editCode?'Editar a sala':'Montar a sala')+'</h2><button class="btn ghost small" data-act="back">Voltar</button></div>'+
+    (S.editCode?'<p class="hint">Sala '+esc(S.editCode)+'. As mudanças valem para os próximos jogos.</p>':'<p class="hint">As perguntas abaixo são um exemplo. Edite, apague ou escreva as suas.</p>')+
+    '<div class="field"><label for="rtitle">Título da sala</label><input id="rtitle" data-f="title" maxlength="60" placeholder="Ex.: Revisão de Ciências" value="'+esc(d.title)+'"></div>'+
+    qs+
+    '<div class="actions"><button class="btn ghost" data-act="addq"'+(d.questions.length>=30?' disabled':'')+'>Adicionar pergunta</button>'+
+    '<button class="btn" data-act="save">'+(S.editCode?'Salvar alterações':'Criar sala')+'</button></div>'+
+    (S.err?'<p class="err" role="alert">'+esc(S.err)+'</p>':'')+
+  '</section>';
+}
+function fairHTML(){
+  var r=roomOf(S.kiosk);
+  var exit=S.exitAsk?
+    '<p class="hint">Sair do modo feira?</p><div class="actions"><button class="btn small" data-act="exityes">Sim, sair</button><button class="btn ghost small" data-act="exitno">Cancelar</button></div>':
+    '<button class="btn ghost small" data-act="exitask">Sair do modo feira</button>';
+  return '<section class="panel fair" aria-labelledby="h-f">'+
+    '<span class="badge">Modo Feira</span>'+
+    '<h2 id="h-f">'+esc(r.title)+'</h2>'+
+    '<p class="sub">'+r.questions.length+' perguntas · 60 segundos cada · 100 pontos por acerto</p>'+
+    '<p class="hint" style="max-width:340px;margin:0 auto">Toque em <strong>Começar</strong> para iniciar. No final, a tela volta sozinha para o próximo visitante.</p>'+
+    '<button class="btn big" data-act="start" style="margin-top:8px">Começar</button>'+
+    '<div class="field" style="align-items:center;margin-top:20px">'+exit+'</div></section>';
+}
+function curQ(){var r=roomOf(S.cur.code);var qi=S.cur.order[S.cur.q];return {room:r,qi:qi,q:r.questions[qi],perm:S.cur.oo[qi]};}
+function playHTML(){
+  var c=S.cur,x=curQ(),r=x.room,n=r.questions.length,a=c.answers[c.q];
+  var cpos=x.perm.indexOf(x.q.correct);
+  var opts=x.perm.map(function(src,j){
+    var t=x.q.opts[src],cls='opt',tag='';
+    if(a){
+      if(j===cpos){cls+=' ok';tag='Correta';}
+      else if(a.c===j){cls+=' no';tag='Sua resposta';}
+      else cls+=' dim';
+      if(j===cpos&&a.c===j)tag='Sua resposta';
+    }
+    return '<button class="'+cls+'" data-act="pick" data-i="'+j+'"'+(a?' disabled':'')+'><span class="bub" aria-hidden="true">'+OPT[j]+'</span><span class="txt">'+esc(t)+'</span>'+(tag?'<span class="tag">'+tag+'</span>':'')+'</button>';
+  }).join('');
+  var res='';
+  if(a){
+    var msg=a.ok?'Certo! +'+a.pts+' pontos':(a.c===-1?'Tempo esgotado. Nenhum ponto nesta.':'Não foi dessa vez.');
+    res='<div class="result" role="status"><span class="msg '+(a.ok?'good':'bad')+'">'+msg+'</span><button class="btn" data-act="next">'+(c.q===n-1?'Ver resultado':'Próxima pergunta')+'</button></div>';
+  }
+  var dots='';
+  if(n<=15){
+    dots='<div class="progress-dots" aria-hidden="true">';
+    for(var i=0;i<n;i++){
+      var cls=i<c.q?'done':(i===c.q?'current':'');
+      dots+='<span class="'+cls+'"></span>';
+    }
+    dots+='</div>';
+  }
+  return '<section class="panel" aria-labelledby="h-q">'+
+    '<div class="qhead"><span class="chip">'+esc(r.title)+(S.kiosk?'':' · sala '+esc(c.code))+'</span>'+(S.kiosk?'':'<button class="btn ghost small" data-act="leave">Sair</button>')+'</div>'+
+    '<div class="qhead"><span class="chip">Pergunta '+(c.q+1)+' de '+n+'</span><span class="chip">Seus pontos: '+c.total+'</span></div>'+
+    dots+
+    (a?'':'<div class="timer" id="timer"><div class="bar" aria-hidden="true"><i id="tbar"></i></div><span class="tnum" id="tnum" aria-label="Tempo restante">1:00</span></div>')+
+    '<h2 class="question" id="h-q">'+esc(x.q.q)+'</h2>'+
+    '<div class="opts">'+opts+'</div>'+res+
+  '</section>';
+}
+function doneHTML(){
+  var c=S.cur,r=roomOf(c.code),n=r.questions.length,right=0;
+  Object.keys(c.answers).forEach(function(k){if(c.answers[k].ok)right++;});
+  var pct=n?Math.round((right/n)*100):0;
+  var msg=pct===100?'Parabéns! Acertou todas!':pct>=70?'Muito bem!':pct>=40?'Bom esforço!':'Continue praticando!';
+  return '<section class="panel" aria-labelledby="h-d"><div class="qhead"><h2 id="h-d">Resultado</h2><span class="chip">'+esc(r.title)+'</span></div>'+
+    '<div class="sumrow"><span class="score">'+c.total+'</span><span class="sub">pontos · '+right+' de '+n+' certas</span></div>'+
+    '<p class="pct">'+pct+'% de acerto · '+msg+'</p>'+
+    '<div class="actions" style="margin-top:8px">'+(S.kiosk?'<button class="btn big" data-act="nextplayer">Próximo jogador</button>':'<button class="btn" data-act="retry">Jogar de novo</button><button class="btn ghost" data-act="leave">Voltar ao início</button>')+'</div>'+
+  '</section>';
+}
+function render(){
+  var ae=document.activeElement,fid=(ae&&ae.id&&$app.contains(ae))?ae.id:null,ss=null,se=null;
+  if(fid&&typeof ae.selectionStart==='number'){ss=ae.selectionStart;se=ae.selectionEnd;}
+  var h=S.kiosk&&(S.view==='fair'||S.view==='play'||S.view==='done')?'':brandHTML();
+  if(S.view==='home')h+=homeHTML();
+  else if(S.view==='create')h+=builderHTML();
+  else if(S.view==='fair')h+=fairHTML();
+  else if(S.view==='play')h+=playHTML();
+  else if(S.view==='done')h+=doneHTML();
+  $app.innerHTML='<div class="wrap">'+h+'</div>';
+  if(fid){var el=document.getElementById(fid);if(el){el.focus();try{if(ss!==null)el.setSelectionRange(ss,se);}catch(e){}}}
+}
+
+/* ---------- jogo ---------- */
+function startPlay(code){
+  var r=roomOf(code);if(!r||r.closed)return;
+  var n=r.questions.length;
+  S.cur={code:code,order:shuffle(n),oo:shuffleAll(r.questions),q:0,answers:{},total:0,startedAt:0};
+  S.view='play';render();startTimer();
+}
+function startTimer(){clearInterval(timerH);S.cur.startedAt=Date.now();tick();timerH=setInterval(tick,200);}
+function tick(){
+  if(!S.cur||S.view!=='play')return clearInterval(timerH);
+  var left=Math.max(0,TIME-(Date.now()-S.cur.startedAt));
+  var bar=document.getElementById('tbar'),num=document.getElementById('tnum'),box=document.getElementById('timer');
+  if(bar)bar.style.width=(left/TIME*100)+'%';
+  if(num)num.textContent=fmt(left);
+  if(box)box.classList.toggle('low',left<=10000);
+  if(left<=0){clearInterval(timerH);answer(-1);}
+}
+function answer(i){
+  var c=S.cur;if(!c||S.view!=='play'||c.answers[c.q])return;
+  clearInterval(timerH);
+  var x=curQ(),ok=i>=0&&x.perm[i]===x.q.correct,pts=ok?100:0;
+  c.answers[c.q]={c:i,ok:ok,pts:pts};c.total+=pts;render();
+}
+
+/* ---------- salas ---------- */
+function validDraft(){
+  var d=S.draft,title=(d.title||'').trim()||'Quiz sem título',qs=[];
+  for(var i=0;i<d.questions.length;i++){
+    var qq=d.questions[i],o=qq.opts.map(function(x){return x.trim();});
+    if(!qq.q.trim()){S.err='Escreva o texto da pergunta '+(i+1)+'.';render();return null;}
+    if(o.some(function(x){return !x;})){S.err='Preencha as quatro alternativas da pergunta '+(i+1)+'.';render();return null;}
+    qs.push({q:qq.q.trim(),opts:o,correct:qq.correct});
+  }
+  return {title:title,qs:qs};
+}
+function saveRoom(){
+  var v=validDraft();if(!v)return;
+  S.err='';
+  if(S.editCode){
+    var r=store.rooms[S.editCode];
+    r.title=v.title;r.questions=v.qs;r.editedAt=Date.now();
+    S.msg='Sala '+S.editCode+' atualizada.';
+  }else{
+    var code=newCode();
+    if(!code){S.err='Não foi possível gerar um código livre.';return render();}
+    store.rooms[code]={title:v.title,questions:v.qs,createdAt:Date.now()};
+    S.msg='Sala criada. Código: '+code;
+  }
+  persist();S.editCode='';S.draft=newDraft();S.view='home';render();
+}
+function exportAll(){
+  S.bkerr=false;
+  var list=roomList();
+  if(!list.length){S.bkerr=true;S.bkmsg='Não há salas para exportar.';return render();}
+  var rooms=list.map(function(r){
+    var d={title:r.title,questions:r.questions,createdBy:null,createdAt:r.createdAt||Date.now()};
+    if(r.closed)d.closed=true;if(r.editedAt)d.editedAt=r.editedAt;
+    return {id:r.code,data:d};
+  });
+  var payload={app:'quiz-feira-cultural',version:1,exportedAt:new Date().toISOString(),exportedBy:null,rooms:rooms,scores:[]};
+  try{
+    var blob=new Blob([JSON.stringify(payload,null,1)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='quiz-feira-cultural-backup-'+today()+'.json';
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},1500);
+    S.bkmsg='Backup exportado: '+rooms.length+' salas. Procure o arquivo na pasta de downloads.';
+  }catch(e){S.bkerr=true;S.bkmsg='Não foi possível gerar o arquivo de backup.';}
+  render();
+}
+function readImport(file){
+  S.pending=null;S.bkmsg='';S.bkerr=false;
+  if(!file)return render();
+  if(file.size>15*1024*1024){S.bkerr=true;S.bkmsg='O arquivo é grande demais para importar.';return render();}
+  var fr=new FileReader();
+  fr.onload=function(){
+    var r=parseBackup(String(fr.result));
+    if(r.error){S.bkerr=true;S.bkmsg=r.error;}else S.pending=r;
+    render();
+  };
+  fr.onerror=function(){S.bkerr=true;S.bkmsg='Não foi possível ler o arquivo.';render();};
+  fr.readAsText(file);
+}
+function runImport(){
+  var p=S.pending;if(!p)return;
+  p.rooms.forEach(function(r){store.rooms[r.id]=r.data;});
+  persist();S.bkerr=false;S.bkmsg='Importação concluída: '+p.rooms.length+' salas.';S.pending=null;render();
+}
+function leave(){clearInterval(timerH);S.cur=null;S.view='home';render();}
+
+var A={
+  play:function(i,b){S.err='';S.msg='';startPlay(b.dataset.code);},
+  fair:function(){S.kiosk=FAIR_CODE;S.exitAsk=false;S.exitErr='';S.view='fair';render();},
+  start:function(){startPlay(S.kiosk);},
+  nextplayer:function(){S.cur=null;S.view='fair';render();},
+  exitask:function(){S.exitAsk=true;S.exitErr='';render();},
+  exitno:function(){S.exitAsk=false;S.exitErr='';render();},
+  exityes:function(){S.kiosk='';S.exitAsk=false;S.exitErr='';S.cur=null;S.view='home';render();},
+  join:function(){
+    var c=(S.joinCode||'').toUpperCase().trim();
+    if(c.length<4){S.err='O código tem 5 letras.';return render();}
+    var r=store.rooms[c];
+    if(!r){S.err='Sala não encontrada neste computador. Confira o código.';return render();}
+    if(r.closed){S.err='Esta sala está encerrada.';return render();}
+    S.err='';S.msg='';startPlay(c);
+  },
+  newroom:function(){S.err='';S.msg='';S.editCode='';S.draft=newDraft();S.view='create';render();},
+  edit:function(i,b){
+    var r=store.rooms[b.dataset.code];if(!r)return;
+    S.draft={title:r.title,questions:r.questions.map(function(q){return {q:q.q,opts:q.opts.slice(),correct:q.correct};})};
+    S.editCode=b.dataset.code;S.err='';S.msg='';S.view='create';render();
+  },
+  back:function(){S.err='';S.editCode='';S.view='home';render();},
+  addq:function(){S.draft.questions.push(blankQ());render();},
+  delq:function(i){S.draft.questions.splice(i,1);render();},
+  save:function(){saveRoom();},
+  endask:function(i,b){S.confirm='end:'+b.dataset.code;render();},
+  endyes:function(i,b){var r=store.rooms[b.dataset.code];if(r){r.closed=true;persist();}S.confirm='';render();},
+  reopen:function(i,b){var r=store.rooms[b.dataset.code];if(r){delete r.closed;persist();}render();},
+  delask:function(i,b){S.confirm='del:'+b.dataset.code;render();},
+  delyes:function(i,b){delete store.rooms[b.dataset.code];persist();S.confirm='';render();},
+  noconf:function(){S.confirm='';render();},
+  pick:function(i){answer(i);},
+  next:function(){
+    var c=S.cur,n=roomOf(c.code).questions.length;
+    if(c.q>=n-1){S.view='done';render();return;}
+    c.q++;render();startTimer();
+  },
+  retry:function(){startPlay(S.cur.code);},
+  leave:leave,
+  export:function(){exportAll();},
+  impgo:function(){runImport();},
+  impno:function(){S.pending=null;S.bkmsg='';render();}
+};
+$app.addEventListener('click',function(e){
+  var b=e.target.closest('[data-act]');
+  if(!b||b.disabled)return;
+  var fn=A[b.dataset.act];
+  if(fn)fn(parseInt(b.dataset.i,10),b);
+});
+$app.addEventListener('input',function(e){
+  var t=e.target,f=t.dataset.f;if(!f)return;
+  var i=parseInt(t.dataset.i,10),j=parseInt(t.dataset.j,10);
+  if(f==='code'){t.value=t.value.toUpperCase().replace(/[^A-Z]/g,'');S.joinCode=t.value;}
+  else if(f==='title')S.draft.title=t.value;
+  else if(f==='q')S.draft.questions[i].q=t.value;
+  else if(f==='o')S.draft.questions[i].opts[j]=t.value;
+});
+$app.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.dataset.f==='file'){readImport(t.files&&t.files[0]);return;}
+  if(t.dataset.f==='c')S.draft.questions[parseInt(t.dataset.i,10)].correct=parseInt(t.value,10);
+});
+$app.addEventListener('keydown',function(e){
+  var f=e.target.dataset&&e.target.dataset.f;
+  if(e.key==='Enter'&&f==='code'){e.preventDefault();A.join();}
+});
+
+load();
+dropOldCopies();
+S.draft=newDraft();
+render();
+})();
+</script>
+</body>
+</html>
