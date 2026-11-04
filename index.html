@@ -3,21 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Quiz Feira Cultural – responda perguntas no seu ritmo. Ideal para feiras e eventos escolares.">
-<meta name="theme-color" content="#1E3FAE">
-<title>Quiz Feira Cultural</title>
+<meta name="description" content="Quiz Feira Cultural Dom Henrique – Pegada Ecológica. Responda perguntas no seu ritmo.">
+<meta name="theme-color" content="#0A2E6E">
+<title>Quiz Feira Cultural · Dom Henrique</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Mono:wght@500&family=Figtree:wght@400;500;600&display=swap">
 <style>
 :root{
+  /* Cores oficiais aproximadas do Colégio Dom Henrique */
   --bg:#FFFFFF;
   --surface:#FFFFFF;
-  --ink:#16213A;
-  --muted:#566182;
-  --line:#D3DAE8;
-  --accent:#1E3FAE;
+  --ink:#0A1F45;
+  --muted:#4A5A78;
+  --line:#C8D2E6;
+  --accent:#0A2E6E;          /* Azul marinho do site */
   --accent-ink:#FFFFFF;
+  --accent-soft:#E8EEF8;     /* Fundo suave do azul */
+  --red:#E30613;             /* Vermelho dos botões do site */
   --good:#18794E;
   --good-bg:#E3F4EB;
   --bad:#B8321F;
@@ -30,9 +33,12 @@
 *{box-sizing:border-box}
 html,body{margin:0}
 body{
-  background-color:var(--bg);
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg font-family='Arial,Helvetica,sans-serif' font-weight='700' fill='%23E3E8F3'%3E%3Ctext x='22' y='62' font-size='44' transform='rotate(-14 22 62)'%3E?%3C/text%3E%3Ctext x='150' y='46' font-size='30' transform='rotate(18 150 46)'%3E?%3C/text%3E%3Ctext x='198' y='140' font-size='54' transform='rotate(-8 198 140)'%3E?%3C/text%3E%3Ctext x='92' y='152' font-size='34' transform='rotate(24 92 152)'%3E?%3C/text%3E%3Ctext x='28' y='232' font-size='50' transform='rotate(10 28 232)'%3E?%3C/text%3E%3Ctext x='150' y='236' font-size='28' transform='rotate(-20 150 236)'%3E?%3C/text%3E%3Ctext x='96' y='60' font-size='24' transform='rotate(-6 96 60)'%3E?%3C/text%3E%3C/g%3E%3C/svg%3E");
-  background-size:260px 260px;
+  background-color:#E8EEF8;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg font-family='Arial,Helvetica,sans-serif' font-weight='700' fill='%23C5D0E8'%3E%3Ctext x='22' y='62' font-size='44' transform='rotate(-14 22 62)'%3E?%3C/text%3E%3Ctext x='150' y='46' font-size='30' transform='rotate(18 150 46)'%3E?%3C/text%3E%3Ctext x='198' y='140' font-size='54' transform='rotate(-8 198 140)'%3E?%3C/text%3E%3Ctext x='92' y='152' font-size='34' transform='rotate(24 92 152)'%3E?%3C/text%3E%3Ctext x='28' y='232' font-size='50' transform='rotate(10 28 232)'%3E?%3C/text%3E%3Ctext x='150' y='236' font-size='28' transform='rotate(-20 150 236)'%3E?%3C/text%3E%3Ctext x='96' y='60' font-size='24' transform='rotate(-6 96 60)'%3E?%3C/text%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(180deg, #D6E0F5 0%, #E8EEF8 35%, #F4F7FC 70%, #FFFFFF 100%);
+  background-size:260px 260px, 100% 100%;
+  background-attachment:fixed;
   color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5;
   padding:28px 16px 56px;
   min-height:100dvh;
@@ -81,11 +87,11 @@ input::placeholder,textarea::placeholder{color:var(--muted);opacity:.8}
 .code span{width:52px;height:64px;border:2px solid var(--ink);border-radius:6px;font:500 2.2rem var(--font-mono);display:grid;place-items:center;background:var(--surface)}
 .chip{display:inline-flex;gap:8px;align-items:center;font:500 .85rem var(--font-mono);color:var(--muted)}
 .timer{display:flex;align-items:center;gap:12px}
-.bar{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
-.bar i{display:block;height:100%;width:100%;background:var(--accent);transition:width .2s linear}
+.bar{flex:1;height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:var(--accent);transition:width .2s linear;border-radius:5px}
 .timer.low .bar i{background:var(--bad)}
 .timer.low .tnum{color:var(--bad)}
-.tnum{font:500 1.1rem var(--font-mono);min-width:3.2ch;text-align:right;font-variant-numeric:tabular-nums}
+.tnum{font:500 1.15rem var(--font-mono);min-width:3.2ch;text-align:right;font-variant-numeric:tabular-nums}
 .question{font:800 1.45rem var(--font-display);line-height:1.25;text-wrap:balance}
 .opts{display:flex;flex-direction:column;gap:10px}
 .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer;min-height:52px}
@@ -104,7 +110,7 @@ input::placeholder,textarea::placeholder{color:var(--muted);opacity:.8}
 .result .msg{font-weight:600}
 .result .msg.good{color:var(--good)}
 .result .msg.bad{color:var(--bad)}
-.score{font:800 3.4rem var(--font-display);line-height:1;font-variant-numeric:tabular-nums}
+.score{font:800 3.6rem var(--font-display);line-height:1;font-variant-numeric:tabular-nums}
 .sumrow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .rooms{display:flex;flex-direction:column;gap:10px}
 .rrow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border:1px solid var(--line);border-radius:8px;padding:10px 12px}
@@ -116,20 +122,46 @@ input[type=file]::file-selector-button{font:600 .9rem var(--font-body);backgroun
 .fair h2{font-size:2.1rem}
 .fair .code{justify-content:center}
 .badge{display:inline-block;font:600 .75rem var(--font-mono);letter-spacing:.04em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);padding:4px 10px;border-radius:999px;margin-bottom:8px}
-.progress-dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:4px 0}
-.progress-dots span{width:10px;height:10px;border-radius:50%;background:var(--line)}
-.progress-dots span.done{background:var(--accent)}
-.progress-dots span.current{background:var(--ink);transform:scale(1.15)}
-.pct{font:600 1.1rem var(--font-mono);color:var(--muted)}
+.school{font:600 .95rem var(--font-body);color:var(--muted);letter-spacing:.02em;margin-bottom:4px}
+.progress-track{height:12px;background:var(--line);border-radius:6px;overflow:hidden;margin:4px 0 2px}
+.progress-track i{display:block;height:100%;background:var(--accent);border-radius:6px;transition:width .3s ease}
+.progress-label{font:500 .8rem var(--font-mono);color:var(--muted);text-align:right}
+.pct{font:700 1.25rem var(--font-mono);color:var(--ink)}
+.msg-big{font:700 1.15rem var(--font-display);margin-top:4px}
+.msg-big.good{color:var(--good)}
+.msg-big.mid{color:var(--accent)}
+.msg-big.low{color:var(--muted)}
+.review{display:flex;flex-direction:column;gap:10px;margin-top:8px;max-height:320px;overflow-y:auto}
+.rev-item{border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:.92rem}
+.rev-item.ok{border-color:var(--good);background:var(--good-bg)}
+.rev-item.no{border-color:var(--bad);background:var(--bad-bg)}
+.rev-q{font-weight:600;margin-bottom:4px}
+.rev-a{color:var(--muted);font-size:.88rem}
+.rev-tag{font:600 .75rem var(--font-mono);margin-left:6px}
+.instr{background:var(--accent-soft);border:1.5px solid #B8C8E0;border-radius:10px;padding:14px 16px;text-align:left;max-width:400px;margin:0 auto;font-size:.95rem}
+.instr ul{margin:8px 0 0;padding-left:18px}
+.instr li{margin:4px 0}
+.admin-link{font-size:.8rem;color:var(--muted);text-decoration:underline;cursor:pointer;background:none;border:none;padding:0;font-family:inherit}
+.admin-link:hover{color:var(--ink)}
+.confetti-wrap{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:100}
+.confetti{position:absolute;width:10px;height:10px;top:-20px;opacity:0;animation:fall linear forwards}
+@keyframes fall{
+  0%{transform:translateY(0) rotate(0deg);opacity:1}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
 @media (max-width:480px){
   h1{font-size:1.7rem}
   .code span{width:44px;height:56px;font-size:1.9rem}
   .fair{padding:28px 16px}
   .fair h2{font-size:1.7rem}
   .btn.big{font-size:1.15rem;padding:16px 24px}
+  .score{font-size:3rem}
 }
 @media (prefers-reduced-motion:no-preference){
   .opt,.btn{transition:border-color .15s,background-color .15s,filter .15s}
+}
+@media (prefers-reduced-motion:reduce){
+  .confetti{animation:none;display:none}
 }
 </style>
 </head>
@@ -140,7 +172,7 @@ input[type=file]::file-selector-button{font:600 .9rem var(--font-body);backgroun
 var KEY='quiz-feira-cultural:v1',LETTERS='ABCDEFGHJKLMNPQRSTUVWXYZ',TIME=60000,OPT=['A','B','C','D'];
 var $app=document.getElementById('app');
 var store={rooms:{}};
-var S={view:'home',err:'',msg:'',draft:null,editCode:'',confirm:'',cur:null,kiosk:'',exitAsk:false,exitErr:'',joinCode:'',pending:null,storeWarn:'',bkmsg:'',bkerr:false};
+var S={view:'fair',err:'',msg:'',draft:null,editCode:'',confirm:'',cur:null,kiosk:'_feira',exitAsk:false,exitErr:'',joinCode:'',pending:null,storeWarn:'',bkmsg:'',bkerr:false,showReview:false};
 var timerH=null;
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -173,7 +205,6 @@ var FAIR={title:'Pegada Ecológica',questions:[
 function roomOf(code){return code===FAIR_CODE?FAIR:store.rooms[code];}
 function blankQ(){return {q:'',opts:['','','',''],correct:0};}
 
-/* ---------- validação ---------- */
 var CODE_RE=/^[A-Z]{4,5}$/;
 function isObj(o){return o!==null&&typeof o==='object'&&!Array.isArray(o);}
 function cleanRoom(r){
@@ -203,7 +234,6 @@ function parseBackup(text){
   return {rooms:rooms,skipped:skipped,scores:Array.isArray(p.scores)?p.scores.length:0};
 }
 
-/* ---------- armazenamento local ---------- */
 function load(){
   try{
     var t=localStorage.getItem(KEY);
@@ -239,13 +269,30 @@ function roomList(){
 function randCode(){var c='';for(var i=0;i<5;i++)c+=LETTERS.charAt(Math.floor(Math.random()*LETTERS.length));return c;}
 function newCode(){for(var t=0;t<50;t++){var c=randCode();if(!store.rooms[c])return c;}return null;}
 
-/* ---------- telas ---------- */
+function launchConfetti(){
+  var wrap=document.createElement('div');
+  wrap.className='confetti-wrap';
+  wrap.setAttribute('aria-hidden','true');
+  document.body.appendChild(wrap);
+  var colors=['#0A2E6E','#E30613','#18794E','#E8B931','#FFFFFF','#2A9D8F','#0A1F45'];
+  for(var i=0;i<60;i++){
+    var el=document.createElement('div');
+    el.className='confetti';
+    el.style.left=Math.random()*100+'%';
+    el.style.background=colors[Math.floor(Math.random()*colors.length)];
+    el.style.width=(6+Math.random()*8)+'px';
+    el.style.height=(6+Math.random()*8)+'px';
+    el.style.borderRadius=Math.random()>.5?'50%':'2px';
+    el.style.animationDuration=(2.2+Math.random()*2.5)+'s';
+    el.style.animationDelay=(Math.random()*0.8)+'s';
+    wrap.appendChild(el);
+  }
+  setTimeout(function(){wrap.remove();},5500);
+}
+
 function brandHTML(){
   return '<header class="brand"><div class="brand-row"><h1>Quiz Feira Cultural</h1><div class="bubs" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span></div></div>'+
-    '<p class="sub">Monte suas perguntas e deixe o quiz rodando. Cada pessoa responde no próprio ritmo.</p></header>';
-}
-function codeBoxes(code){
-  return '<div class="code" aria-label="Código da sala: '+esc(code.split('').join(' '))+'">'+code.split('').map(function(c){return '<span aria-hidden="true">'+esc(c)+'</span>';}).join('')+'</div>';
+    '<p class="sub">Colégio Dom Henrique · Monte suas perguntas e deixe o quiz rodando.</p></header>';
 }
 function homeHTML(){
   var list=roomList();
@@ -263,8 +310,8 @@ function homeHTML(){
   var pend=S.pending;
   return (S.storeWarn?'<p class="warn" role="alert">'+esc(S.storeWarn)+'</p>':'')+
   '<section class="panel" aria-labelledby="h-fair"><h2 id="h-fair">Modo feira</h2>'+
-    '<p class="hint">Quiz fixo de <strong>'+esc(FAIR.title)+'</strong> com '+FAIR.questions.length+' perguntas. Ideal para visitantes: a tela volta sozinha ao início após cada jogador. Não pode ser editado nem excluído.</p>'+
-    '<div class="actions"><button class="btn" data-act="fair">Iniciar modo feira</button></div></section>'+
+    '<p class="hint">Quiz fixo de <strong>'+esc(FAIR.title)+'</strong> com '+FAIR.questions.length+' perguntas. Ideal para visitantes: a tela volta sozinha ao início após cada jogador.</p>'+
+    '<div class="actions"><button class="btn" data-act="fair">Voltar ao modo feira</button></div></section>'+
   '<section class="panel" aria-labelledby="h-rooms"><h2 id="h-rooms">Salas neste computador</h2><div class="rooms">'+rows+'</div>'+
     '</section>'+
   '<section class="panel" aria-labelledby="h-join"><h2 id="h-join">Jogar com um código</h2>'+
@@ -278,7 +325,7 @@ function homeHTML(){
     (S.msg?'<p class="ok-msg" role="status">'+esc(S.msg)+'</p>':'')+
   '</section>'+
   '<section class="panel" aria-labelledby="h-bk"><h2 id="h-bk">Backup e transferência</h2>'+
-    '<p class="hint">Para levar as salas para outro computador, exporte aqui e importe lá. O quiz do modo feira já vem no arquivo e não entra no backup.</p>'+
+    '<p class="hint">Para levar as salas para outro computador, exporte aqui e importe lá.</p>'+
     '<div class="actions"><button class="btn ghost" data-act="export">Exportar tudo</button></div>'+
     '<div class="field"><label for="impfile">Importar de um arquivo de backup</label><input type="file" id="impfile" data-f="file" accept=".json,application/json"></div>'+
     (pend?'<div class="notice"><strong>Pronto para importar:</strong> '+pend.rooms.length+' salas'+(pend.skipped?' ('+pend.skipped+' itens inválidos serão ignorados)':'')+(pend.scores?'. Os '+pend.scores+' registros de jogo do backup não são usados nesta versão':'')+'. Salas com o mesmo código serão substituídas.</div>'+
@@ -311,16 +358,22 @@ function builderHTML(){
 }
 function fairHTML(){
   var r=roomOf(S.kiosk);
-  var exit=S.exitAsk?
-    '<p class="hint">Sair do modo feira?</p><div class="actions"><button class="btn small" data-act="exityes">Sim, sair</button><button class="btn ghost small" data-act="exitno">Cancelar</button></div>':
-    '<button class="btn ghost small" data-act="exitask">Sair do modo feira</button>';
   return '<section class="panel fair" aria-labelledby="h-f">'+
-    '<span class="badge">Modo Feira</span>'+
+    '<p class="school">Colégio Dom Henrique</p>'+
+    '<span class="badge">Feira Cultural</span>'+
     '<h2 id="h-f">'+esc(r.title)+'</h2>'+
     '<p class="sub">'+r.questions.length+' perguntas · 60 segundos cada · 100 pontos por acerto</p>'+
-    '<p class="hint" style="max-width:340px;margin:0 auto">Toque em <strong>Começar</strong> para iniciar. No final, a tela volta sozinha para o próximo visitante.</p>'+
-    '<button class="btn big" data-act="start" style="margin-top:8px">Começar</button>'+
-    '<div class="field" style="align-items:center;margin-top:20px">'+exit+'</div></section>';
+    '<div class="instr">'+
+      '<strong>Como jogar</strong>'+
+      '<ul>'+
+        '<li>Toque em <strong>Começar</strong></li>'+
+        '<li>Escolha a alternativa correta (A, B, C ou D)</li>'+
+        '<li>Você tem 60 segundos por pergunta</li>'+
+        '<li>No final veja sua pontuação e as respostas</li>'+
+      '</ul>'+
+    '</div>'+
+    '<button class="btn big" data-act="start" style="margin-top:12px">Começar</button>'+
+  '</section>';
 }
 function curQ(){var r=roomOf(S.cur.code);var qi=S.cur.order[S.cur.q];return {room:r,qi:qi,q:r.questions[qi],perm:S.cur.oo[qi]};}
 function playHTML(){
@@ -341,19 +394,12 @@ function playHTML(){
     var msg=a.ok?'Certo! +'+a.pts+' pontos':(a.c===-1?'Tempo esgotado. Nenhum ponto nesta.':'Não foi dessa vez.');
     res='<div class="result" role="status"><span class="msg '+(a.ok?'good':'bad')+'">'+msg+'</span><button class="btn" data-act="next">'+(c.q===n-1?'Ver resultado':'Próxima pergunta')+'</button></div>';
   }
-  var dots='';
-  if(n<=15){
-    dots='<div class="progress-dots" aria-hidden="true">';
-    for(var i=0;i<n;i++){
-      var cls=i<c.q?'done':(i===c.q?'current':'');
-      dots+='<span class="'+cls+'"></span>';
-    }
-    dots+='</div>';
-  }
+  var pctDone=((c.q+(a?1:0))/n)*100;
   return '<section class="panel" aria-labelledby="h-q">'+
     '<div class="qhead"><span class="chip">'+esc(r.title)+(S.kiosk?'':' · sala '+esc(c.code))+'</span>'+(S.kiosk?'':'<button class="btn ghost small" data-act="leave">Sair</button>')+'</div>'+
-    '<div class="qhead"><span class="chip">Pergunta '+(c.q+1)+' de '+n+'</span><span class="chip">Seus pontos: '+c.total+'</span></div>'+
-    dots+
+    '<div class="qhead"><span class="chip">Pergunta '+(c.q+1)+' de '+n+'</span><span class="chip">Pontos: '+c.total+'</span></div>'+
+    '<div class="progress-track" aria-hidden="true"><i style="width:'+pctDone+'%"></i></div>'+
+    '<div class="progress-label">'+(c.q+1)+' / '+n+'</div>'+
     (a?'':'<div class="timer" id="timer"><div class="bar" aria-hidden="true"><i id="tbar"></i></div><span class="tnum" id="tnum" aria-label="Tempo restante">1:00</span></div>')+
     '<h2 class="question" id="h-q">'+esc(x.q.q)+'</h2>'+
     '<div class="opts">'+opts+'</div>'+res+
@@ -363,11 +409,35 @@ function doneHTML(){
   var c=S.cur,r=roomOf(c.code),n=r.questions.length,right=0;
   Object.keys(c.answers).forEach(function(k){if(c.answers[k].ok)right++;});
   var pct=n?Math.round((right/n)*100):0;
-  var msg=pct===100?'Parabéns! Acertou todas!':pct>=70?'Muito bem!':pct>=40?'Bom esforço!':'Continue praticando!';
-  return '<section class="panel" aria-labelledby="h-d"><div class="qhead"><h2 id="h-d">Resultado</h2><span class="chip">'+esc(r.title)+'</span></div>'+
-    '<div class="sumrow"><span class="score">'+c.total+'</span><span class="sub">pontos · '+right+' de '+n+' certas</span></div>'+
-    '<p class="pct">'+pct+'% de acerto · '+msg+'</p>'+
-    '<div class="actions" style="margin-top:8px">'+(S.kiosk?'<button class="btn big" data-act="nextplayer">Próximo jogador</button>':'<button class="btn" data-act="retry">Jogar de novo</button><button class="btn ghost" data-act="leave">Voltar ao início</button>')+'</div>'+
+  var msgCls=pct===100||pct>=80?'good':pct>=50?'mid':'low';
+  var msg=pct===100?'Parabéns! Acertou todas!':pct>=80?'Excelente!':pct>=50?'Bom trabalho!':'Continue praticando!';
+
+  var review='';
+  if(S.showReview){
+    review='<div class="review">';
+    for(var i=0;i<n;i++){
+      var qi=c.order[i],q=r.questions[qi],ans=c.answers[i],perm=c.oo[qi];
+      var correctText=q.opts[q.correct];
+      var userText=ans&&ans.c>=0?q.opts[perm[ans.c]]:null;
+      var ok=ans&&ans.ok;
+      review+='<div class="rev-item '+(ok?'ok':'no')+'">'+
+        '<div class="rev-q">'+(i+1)+'. '+esc(q.q)+'</div>'+
+        '<div class="rev-a">Correta: <strong>'+esc(correctText)+'</strong>'+
+        (ok?'':' · Sua resposta: '+(userText?esc(userText):'<em>tempo esgotado</em>'))+
+        '<span class="rev-tag">'+(ok?'✓':'✗')+'</span></div></div>';
+    }
+    review+='</div>';
+  }
+
+  return '<section class="panel" aria-labelledby="h-d">'+
+    '<div class="qhead"><h2 id="h-d">Resultado</h2><span class="chip">'+esc(r.title)+'</span></div>'+
+    '<div class="sumrow"><span class="score">'+c.total+'</span><span class="sub">pontos</span></div>'+
+    '<p class="pct">'+right+' de '+n+' certas · '+pct+'%</p>'+
+    '<p class="msg-big '+msgCls+'">'+msg+'</p>'+
+    (S.showReview?'':
+      '<div class="actions" style="margin-top:6px"><button class="btn ghost" data-act="togglereview">Ver revisão das respostas</button></div>')+
+    review+
+    '<div class="actions" style="margin-top:12px">'+(S.kiosk?'<button class="btn big" data-act="nextplayer">Próximo jogador</button>':'<button class="btn" data-act="retry">Jogar de novo</button><button class="btn ghost" data-act="leave">Voltar ao início</button>')+'</div>'+
   '</section>';
 }
 function render(){
@@ -383,11 +453,11 @@ function render(){
   if(fid){var el=document.getElementById(fid);if(el){el.focus();try{if(ss!==null)el.setSelectionRange(ss,se);}catch(e){}}}
 }
 
-/* ---------- jogo ---------- */
 function startPlay(code){
   var r=roomOf(code);if(!r||r.closed)return;
   var n=r.questions.length;
   S.cur={code:code,order:shuffle(n),oo:shuffleAll(r.questions),q:0,answers:{},total:0,startedAt:0};
+  S.showReview=false;
   S.view='play';render();startTimer();
 }
 function startTimer(){clearInterval(timerH);S.cur.startedAt=Date.now();tick();timerH=setInterval(tick,200);}
@@ -407,7 +477,6 @@ function answer(i){
   c.answers[c.q]={c:i,ok:ok,pts:pts};c.total+=pts;render();
 }
 
-/* ---------- salas ---------- */
 function validDraft(){
   var d=S.draft,title=(d.title||'').trim()||'Quiz sem título',qs=[];
   for(var i=0;i<d.questions.length;i++){
@@ -476,7 +545,7 @@ var A={
   play:function(i,b){S.err='';S.msg='';startPlay(b.dataset.code);},
   fair:function(){S.kiosk=FAIR_CODE;S.exitAsk=false;S.exitErr='';S.view='fair';render();},
   start:function(){startPlay(S.kiosk);},
-  nextplayer:function(){S.cur=null;S.view='fair';render();},
+  nextplayer:function(){S.cur=null;S.showReview=false;S.view='fair';render();},
   exitask:function(){S.exitAsk=true;S.exitErr='';render();},
   exitno:function(){S.exitAsk=false;S.exitErr='';render();},
   exityes:function(){S.kiosk='';S.exitAsk=false;S.exitErr='';S.cur=null;S.view='home';render();},
@@ -507,14 +576,23 @@ var A={
   pick:function(i){answer(i);},
   next:function(){
     var c=S.cur,n=roomOf(c.code).questions.length;
-    if(c.q>=n-1){S.view='done';render();return;}
+    if(c.q>=n-1){
+      S.view='done';
+      render();
+      var right=0;
+      Object.keys(c.answers).forEach(function(k){if(c.answers[k].ok)right++;});
+      var pct=n?Math.round((right/n)*100):0;
+      if(pct>=70)launchConfetti();
+      return;
+    }
     c.q++;render();startTimer();
   },
   retry:function(){startPlay(S.cur.code);},
   leave:leave,
   export:function(){exportAll();},
   impgo:function(){runImport();},
-  impno:function(){S.pending=null;S.bkmsg='';render();}
+  impno:function(){S.pending=null;S.bkmsg='';render();},
+  togglereview:function(){S.showReview=true;render();}
 };
 $app.addEventListener('click',function(e){
   var b=e.target.closest('[data-act]');
@@ -543,6 +621,8 @@ $app.addEventListener('keydown',function(e){
 load();
 dropOldCopies();
 S.draft=newDraft();
+S.kiosk=FAIR_CODE;
+S.view='fair';
 render();
 })();
 </script>
